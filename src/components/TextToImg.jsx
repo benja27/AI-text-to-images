@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 const BASE_URL = 'https://cloud.leonardo.ai/api/rest/v1/generations/';
 let genId;
-
+// let key = import.meta.env.VITE_APP_API_URL
+// console.log(key) 
 
 function TextToImg() {
 
@@ -13,6 +14,7 @@ function TextToImg() {
         accept: 'application/json',
         'content-type': 'application/json',
         authorization: `Bearer ${import.meta.env.VITE_APP_API_URL}`,
+        // authorization: `Bearer 4fa90a87-7907-4a80-954d-90198e253bc3`,
       },
       body: JSON.stringify({
         prompt: data.prompt,
@@ -71,25 +73,25 @@ function TextToImg() {
   }
 
 
-  useEffect(()=>{
-    const form = document.getElementById('list-form');
-  const formInput = document.getElementById('name');
-  form.addEventListener('submit', async (event) => {
-    console.log("prevent default")
-    event.preventDefault();
-    const newName = formInput.value;
-    const newImg = {
-      prompt: newName    
-    };
-    console.log(newImg)
-    formInput.value = '';
-    // const genId = await postIdea(newImg); // Wait for the postIdea function to complete
-    const genId = await postIdea(newImg); // Wait for the postIdea function to complete
-    const URLL = `${BASE_URL}${genId}`;
+  // useEffect(()=>{
+  //   const form = document.getElementById('list-form');
+  // const formInput = document.getElementById('name');
+  // form.addEventListener('submit', async (event) => {
+  //   console.log("prevent default")
+  //   event.preventDefault();
+  //   const newName = formInput.value;
+  //   const newImg = {
+  //     prompt: newName    
+  //   };
+  //   console.log(newImg)
+  //   formInput.value = '';
+  //   // const genId = await postIdea(newImg); // Wait for the postIdea function to complete
+  //   const genId = await postIdea(newImg); // Wait for the postIdea function to complete
+  //   const URLL = `${BASE_URL}${genId}`;
     
-    fetchFinalimg(URLL);
-  });
-  },[])
+  //   fetchFinalimg(URLL);
+  // });
+  // },[])
   
   
   
@@ -108,8 +110,22 @@ function TextToImg() {
           
         </div>
 
-        <form action="" className="py-5 d-flex " id="list-form" >
-          <input type="text" name="" className="form-control" id="name" autoComplete="false" placeholder="A dog dancing breakdance"/>
+        <form onSubmit={ async (e)=>{
+          console.log("prevent default")
+          e.preventDefault();
+          const newName = e.target.textInput.value
+          const newImg = {
+            prompt: newName    
+          };
+          console.log(newImg)
+          // formInput.value = '';
+          // const genId = await postIdea(newImg); // Wait for the postIdea function to complete
+          const genId = await postIdea(newImg); // Wait for the postIdea function to complete
+          const URLL = `${BASE_URL}${genId}`;
+          
+          fetchFinalimg(URLL);
+        }} action="" className="py-5 d-flex " id="list-form" >
+          <input type="text" name="textInput" className="form-control" id="name" autoComplete="false" placeholder="A dog dancing breakdance"/>
           <button type="submit" className="btn btn-dark" >Run</button>
         </form>
 
