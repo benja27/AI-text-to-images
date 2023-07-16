@@ -109,7 +109,7 @@ function TextToImg() {
         </div>
 
         <form action="" className="py-5 d-flex " id="list-form" >
-          <input type="text" name="" className="form-control" id="name" autoComplete="off" placeholder="A dog dancing breakdance"/>
+          <input type="text" name="" className="form-control" id="name" autoComplete="false" placeholder="A dog dancing breakdance"/>
           <button type="submit" className="btn btn-dark" >Run</button>
         </form>
 
