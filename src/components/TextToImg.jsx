@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 const BASE_URL = 'https://cloud.leonardo.ai/api/rest/v1/generations/';
 let genId;
 // let key = import.meta.env.VITE_APP_API_URL
-// console.log(key) 
+
 
 function TextToImg() {
 
